@@ -113,7 +113,11 @@
             });
         }
 
-
+        document
+                .querySelectorAll('input[name^=fb]')
+                .forEach(function (element) {
+                    element.value += (new Date()).toJSON();
+                })
     </script>
 </body>
 
