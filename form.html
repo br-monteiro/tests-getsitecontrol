@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <style>
         #form-jumpstep-signup {
-            display:flex;
+            display: flex;
             flex-wrap: nowrap;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
         }
+
         #form-jumpstep-signup [type="email"] {
             font-family: 'Open Sans', Arial, Helvetica, sans-serif;
             width: calc(100% - 130px);
@@ -27,10 +30,12 @@
             box-shadow: inset 0 2px 3px rgba(64, 64, 64, 0.1);
             color: #404040;
         }
-         #form-jumpstep-signup *:focus,
-          #form-jumpstep-signup *:active {
-              outline:none;
-          }
+
+        #form-jumpstep-signup *:focus,
+        #form-jumpstep-signup *:active {
+            outline: none;
+        }
+
         #form-jumpstep-signup [type="submit"] {
             font-family: 'Open Sans', Arial, Helvetica, sans-serif;
             text-transform: uppercase;
@@ -43,43 +48,60 @@
             cursor: pointer;
             font-size: 13px;
             width: 130px;
-               -webkit-appearance: none;
+            -webkit-appearance: none;
 
         }
     </style>
-    <form id="form-jumpstep-signup" method="POST" action="https://app.rdstation.com.br/signup?trial_origin=fb-conversion-api-blk" onsubmit="fireConversion()">
+    <form id="form-jumpstep-signup" method="POST"
+        action="https://app.rdstation.com.br/signup?trial_origin=fb-conversion-api-blk" onsubmit="fireConversion()">
         <input type="email" name="email" placeholder="Seu email profissional" required>
-        <input type="submit" value="teste grátis" >
-        <input type="hidden" name="_ga" value="" >
+        <input type="submit" value="teste grátis">
+        <input type="hidden" name="_ga" value="">
         <input type="hidden" name="trial_origin" value="fb-conversion-api-blk">
-        <input type="hidden" name="fbp" value="teste-de-valor-fbp">
-        <input type="hidden" name="fbc" value="teste-de-valor-fbc">
+        <input type="hidden" name="fbp" value="teste-de-valor-fbp-1">
+        <input type="hidden" name="fbc" value="teste-de-valor-fbc-1">
         <input type="hidden" name="trial_origin" value="fb-conversion-api-blk">
-        <input type="hidden" name="c_utmz" value="00000000.0000000000.00.00.utmcsr=direct|utmccn=(not set)|utmcmd=(not set)|utmcct=(not set)|utmctr=(not set)" >
+        <input type="hidden" name="c_utmz"
+            value="00000000.0000000000.00.00.utmcsr=direct|utmccn=(not set)|utmcmd=(not set)|utmcct=(not set)|utmctr=(not set)">
+    </form>
+
+    <form id="conversion-form" action="https://www.rdstation.com.br/api/1.2/conversions" data-typed-fields=""
+        data-lang="pt-BR"><input type="hidden" value="" name="traffic_value">
+        <input type="hidden" name="token_rdstation" value="4ac98d510af23fd1b39770575544b8e0">
+        <input type="hidden" name="identificador" value="read-only-developer-test">
+        <input type="hidden" name="c_utmz"
+            value="00000000.0000000000.00.00.utmcsr=direct|utmccn=(not set)|utmcmd=(not set)|utmcct=(not set)|utmctr=(not set)">
+        <input type="hidden" name="traffic_source" value="">
+        <input type="hidden" name="redirect_to" value="https://stoic-keller-edb2f4.netlify.app/form.html?success=true">
+        <input type="hidden" name="privacy_data[browser]" id="privacy_data_browser">
+        <input type="hidden" name="cf_fbp" value="teste-de-valor-fbp-2">
+        <input type="hidden" name="cf_fbc" value="teste-de-valor-fbc-2">
+        <input type="email" name="email" placeholder="Seu email profissional" required>
+        <input type="submit" value="teste grátis">
     </form>
     <script>
-        if(!(typeof UniversalUtmTracker == 'function')){
+        if (!(typeof UniversalUtmTracker == 'function')) {
             var elUTM = document.createElement('script');
             elUTM.src = 'https://d390qphybw14q2.cloudfront.net/UniversalUtmTracker/UniversalUtmTracker.min.js?v=2.0';
-          document.head.appendChild(elUTM);
-            elUTM.addEventListener('load', function() {
-              startJumpStep()
+            document.head.appendChild(elUTM);
+            elUTM.addEventListener('load', function () {
+                startJumpStep()
             });
         } else {
             startJumpStep();
         }
         function fireConversion(e) {
-            window.dataLayer.push({'event': 'conversao'});
+            window.dataLayer.push({ 'event': 'conversao' });
         }
         function getUrlParameter(param) {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             return urlParams.get(param) || '';
         }
-         function startJumpStep() {
-               document.querySelector('#form-jumpstep-signup [name="_ga"]').value = getUrlParameter('_ga');
-             var utm = new UniversalUtmTracker();
-            utm.then(function(utmObject){
+        function startJumpStep() {
+            document.querySelector('#form-jumpstep-signup [name="_ga"]').value = getUrlParameter('_ga');
+            var utm = new UniversalUtmTracker();
+            utm.then(function (utmObject) {
                 document.querySelector('[name="c_utmz"]').value = utmObject.getUtmz();
                 const url = new URL(document.querySelector('#form-jumpstep-signup').action);
                 url.searchParams.set("utm_source", utmObject.utm.source);
@@ -89,9 +111,10 @@
                 url.searchParams.set("utm_term", utmObject.utm.term);
                 document.querySelector('#form-jumpstep-signup').action = url.href
             });
-         }
+        }
 
 
     </script>
 </body>
+
 </html>
