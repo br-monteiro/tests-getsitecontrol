@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+  <form id="form-jumpstep-signup" method="POST"
+    action="https://app.rdstation.com.br/signup?trial_origin=fb-conversion-api-blk">
+    <input type="email" name="email" placeholder="Seu email profissional" required>
+    <input type="submit" value="teste grátis">
+    <input type="hidden" name="_ga" value="">
+    <input type="hidden" name="trial_origin" value="fb-conversion-api-blk">
+    <input type="hidden" name="fbp" value="teste-de-valor-fbp-1234">
+    <input type="hidden" name="fbc" value="teste-de-valor-fbc-1234">
+    <input type="hidden" name="c_utmz"
+      value="00000000.0000000000.00.00.utmcsr=direct|utmccn=(not set)|utmcmd=(not set)|utmcct=(not set)|utmctr=(not set)">
+  </form>
+
+  <script>
+    function _getCookie(e) { var o = new RegExp("\\b" + (e || void 0) + "=(.*?)($|;\\s)", "g").exec(decodeURIComponent(document.cookie)); return o ? o[1] : "" }
+    // function asyncSendConversion(t){if(t.checkValidity()){var e=Object.fromEntries(new FormData(t)),n=Object.assign({token_rdstation:"4ac98d510af23fd1b39770575544b8e0",identificador:"capturing-fb-cookies-blk",useragent:navigator.userAgent,fbp:_getCookie("_fbp"),fbc:_getCookie("_fbc")},e);asyncFireRequest({url:"https://www.rdstation.com.br/api/1.3/conversions",method:"POST",data:n,callback:function(){t.submit()}})}}
+    // function asyncFireRequest(t){var e=new window.XMLHttpRequest;e.open("POST",t.url,!0),e.setRequestHeader("Content-Type","application/json"),e.withCredentials=!0,e.onload=function(){this.readyState===XMLHttpRequest.DONE&&200===this.status?t.callback.call(this,e.response):t.callback.call(this)},e.onerror=function(){t.callback.call(this)},e.send(JSON.stringify(t.data))}
+    function asyncSendConversion(form) {
+      if (!form.checkValidity()) {
+        return;
+      }
+      var dataFromEntries = Object.fromEntries(new FormData(form));
+      var data = Object.assign({
+        token_rdstation: '4ac98d510af23fd1b39770575544b8e0',
+        identificador: 'capturing-fb-cookies-blk',
+        useragent: navigator.userAgent,
+        fbp: _getCookie('_fbp'),
+        fbc: _getCookie('_fbc')
+      }, dataFromEntries);
+
+      asyncFireRequest({
+        url: 'https://www.rdstation.com.br/api/1.3/conversions',
+        method: 'POST',
+        data: data,
+        callback: function () {
+          form.submit();
+        }
+      })
+    }
+
+    function asyncFireRequest(options) {
+      var xhr = new window.XMLHttpRequest();
+
+      xhr.open('POST', options.url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.withCredentials = true;
+
+      xhr.onload = function onload() {
+        if (
+          this.readyState === XMLHttpRequest.DONE &&
+          this.status === 200
+        ) {
+          options.callback.call(this, xhr.response);
+        } else {
+          options.callback.call(this);
+        }
+      }
+
+      xhr.onerror = function onerror() {
+        options.callback.call(this);
+      }
+
+      xhr.send(JSON.stringify(options.data));
+    }
+
+    function __eachBeaconListening(el) {
+      el.addEventListener('submit', function (e) {
+        e.preventDefault();
+        asyncSendConversion(e.target);
+      });
+    }
+
+    document
+      .querySelectorAll('#form-jumpstep-signup')
+      .forEach(__eachBeaconListening)
+  </script>
+</body>
+
+</html>
